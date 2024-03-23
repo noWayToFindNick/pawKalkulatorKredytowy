@@ -1,0 +1,97 @@
+{extends file="../templates/main.html"}
+
+{block name=banner}
+
+<div class="inner">
+    <header class="major">
+        <h1>Kalkulator kredytowy</h1>
+    </header>
+    <div class="content">
+        <p>W pełni działający Kalkulator kredytowy,<br />
+        liczący miesięczną ratę kredytu.</p>
+        <ul class="actions">
+            <li><a href="#contact" class="button next scrolly">Policz</a></li>
+        </ul>
+    </div>
+</div>
+
+{/block}
+
+{block name=content}
+
+<div class="inner">
+    <section>
+        <form method="post" action="{$app_url}/app/calc.php">
+            <div class="fields">
+                <div class="field">
+                    <label for="amount">Kwota kredytu</label>
+                    <input type="text" name="amount" id="amount" value="{$form['amount']}"/>
+                </div>
+                <div class="field">
+                    <label for="years">Na ile lat</label>
+                    <input type="text" name="years" id="years" value="{$form['years']}"/>
+                </div>
+                <div class="field">
+                    <label for="interestRate">oprocentowanie</label>
+                    <input type="text" name="interestRate" id="interestRate" value="{$form['interestRate']}"/>
+                </div>
+            </div>
+            <ul class="actions">
+                <li><input type="submit" value="Oblicz" class="primary" /></li>
+                <li><input type="reset" value="Zresetuj" /></li>
+            </ul>
+        </form>
+    </section>
+    <section class="split">
+        <section>
+            <div class="contact-method">
+                <h3>Wynik</h3>
+
+                {if isset($result)}
+                    <p>
+                    {$result}
+                    </p>
+                {/if}
+
+            </div>
+        </section>
+		<section>
+            <div class="contact-method">
+                <h3>Informacje</h3>
+
+                {if isset($infos)}
+                    {if count($infos) > 0} 
+                        <ul>
+                        {foreach  $infos as $msg}
+                        {strip}
+                            <li>{$msg}</li>
+                        {/strip}
+                        {/foreach}
+                        </ul>
+                    {/if}
+                {/if}
+
+            </div>
+        </section>
+		<section>
+            <div class="contact-method">
+                <h3>Błędy</h3>
+
+                {if isset($messages)}
+                    {if count($messages) > 0} 
+                        <ul>
+                        {foreach  $messages as $msg}
+                        {strip}
+                            <li>{$msg}</li>
+                        {/strip}
+                        {/foreach}
+                        </ul>
+                    {/if}
+                {/if}
+
+            </div>
+        </section>
+    </section>
+</div>
+
+{/block}
